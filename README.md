@@ -8,3 +8,6 @@ Elas estarão guardadas em branches diferentes que vão conter as os arquivos.c.
 
 ### O que é uma branch?
 
+Uma branch é uma espécie de "armazem", nela é guardada os codígos, imagens e todos os tipos de arquivos. Um repositorio pode ter mais de uma brach, cada uma delas pode possuir arquivos diferentes.
+
+<img style="height: auto; width: 50%;" src="https://github.com/AHChaves/Respostas-IP-2023/assets/85091282/55457089-ed00-4613-8bdb-568f68f9aecc"/>
