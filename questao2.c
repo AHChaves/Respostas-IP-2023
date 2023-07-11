@@ -5,13 +5,13 @@
 
 int main(int argc, char **argv){
 
-    setlocale(LC_ALL, "Portuguese_Brazil"); //atribui√ß√£o da linguagem
+    setlocale(LC_ALL, "Portuguese_Brazil"); //atribuiÁ„o da linguagem
 
-    //Vari√°veis
-    int num1, num2, num3, num4, num5, result; //numeros que v√£o ser somados e resultado da opera√ß√£o
+    //Vari·veis
+    int num1, num2, num3, num4, num5, result; //numeros que v„o ser somados e resultado da opera√ß√£o
 
-    //atribuindo o valor do numerador
-    printf("Insira 5 valores que ser„o somados:\n");
+    //atribuindo valores aos numeros
+    printf("Insira 5 valores que ser„o somados (adicione espaÁos entre os numeros, ex: 1 2 3 ...):\n");
     scanf("%d %d %d %d %d",&num1, &num2, &num3, &num4, &num5);
 
 
@@ -21,6 +21,6 @@ int main(int argc, char **argv){
     //imprime o resultado da soma
     printf("O resultado da soma È: %d\n",  result);
 
-    //Se chegou at√© aqui √© porque deu tudo certo
+    //Se chegou atÈ aqui È porque deu tudo certo
     return SUCESSO;
 }
