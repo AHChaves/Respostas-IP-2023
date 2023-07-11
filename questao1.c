@@ -5,25 +5,25 @@
 
 int main(int argc, char **argv){
 
-    setlocale(LC_ALL, "Portuguese_Brazil"); //atribuição da linguagem
+    setlocale(LC_ALL, "Portuguese_Brazil"); //atribuicao da linguagem
 
-    //Variáveis
-    int num, den, result; //numerador, denominador e resultado da operação
+    //Variaveis
+    float num, den, result; //numerador, denominador e resultado da operacao
 
     //atribuindo o valor do numerador
     printf("Insira o valor do numerador:\t");
-    scanf("%d",&num);
+    scanf("%f",&num);
 
     //atribuindo o valor do denominador
     printf("Insira o valor do denominador:\t");
-    scanf("%d",&den);
+    scanf("%f",&den);
 
     //calculo que define o valor do resultado
     result = num / den;
 
     //imprime o numerador no resultado, depois o denominador e por fim o resultado (imprime sempre os valores atribuidos da esquerda para a direita)
-    printf("O resultado de %d / %d é: %d\n", num, den, result);
+    printf("O resultado de %f / %f Ã©: %f\n", num, den, result);
 
-    //Se chegou até aqui é porque deu tudo certo
+    //Se chegou ate aqui eh porque deu tudo certo
     return SUCESSO;
 }
