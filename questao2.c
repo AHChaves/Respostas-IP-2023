@@ -14,7 +14,6 @@ int main(int argc, char **argv){
     printf("Insira 5 valores que serão somados (adicione espaços entre os numeros, ex: 1 2 3 ...):\n");
     scanf("%d %d %d %d %d",&num1, &num2, &num3, &num4, &num5);
 
-
     //calculo que define o valor do resultado
     result = num1 + num2 + num3 + num4 + num5;
 
