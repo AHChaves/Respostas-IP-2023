@@ -57,37 +57,38 @@ void Questao3() {// Roda a questao 3
     printf("Que dia da semana é hoje:");
     scanf("%d", &dia);
 
+    //Confere o valor inserido em dia
     switch (dia)
     {
-    case 1: {
+    case 1: { //se dia for igual a 1, entra nas chaves
         printf("Domingo");
         break;
     }
-    case 2:{
+    case 2:{ //se dia for igual a 2, entra nas chaves
         printf("Segunda");
         break;
     }
-    case 3:{
+    case 3:{ //se dia for igual a 3, entra nas chaves
         printf("Terça-Feira");
         break;
     }
-    case 4:{
+    case 4:{ //se dia for igual a 4, entra nas chaves
         printf("Quarta-Feira");
         break;
     }
-    case 5:{ 
+    case 5:{ //se dia for igual a 5, entra nas chaves
         printf("Quinta-Feira");
         break;
     }
-    case 6:{
+    case 6:{ //se dia for igual a 6, entra nas chaves
         printf("Sexta-Feira");
         break;
     }
-    case 7:{ 
+    case 7:{ //se dia for igual a 7, entra nas chaves
         printf("Sábado");
         break;
     }
-    default:
+    default: //se nao entrou em nenhuma das outras opcoes, significa entao que dia eh um valor invalido 
         printf("Dia invalido");
         break;
     }
