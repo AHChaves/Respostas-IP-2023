@@ -1,6 +1,9 @@
 # Lista 02
 
-## Nota: As questões foram respondidas como se eu fosse um aluno do 1º ano
+## Nota
+As questões foram respondidas como se eu fosse um aluno do 1º ano
+
+Daqui em diante todas as respostas estarão somente em 1 (um) arquivo
 
 ### Instruções
 Faça um arquivo .c para cada questão. A solução fornecida
