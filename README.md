@@ -1,13 +1,47 @@
-# Respostas-IP-2023
+# Lista 02
 
-Este repositório foi criado para guardar as respostas das atividades da disciplina de IP (introdução a Programação) dos alunos do ano de 2023.
+## Nota: As questões foram respondidas como se eu fosse um aluno do 1º ano
 
-## Onde estarão as respostas?
+### Instruções
+Faça um arquivo .c para cada questão. A solução fornecida
+usa está em um único arquivo pois ela contém o assunto “Funções”. Caso
+você já saiba como utilizá-las, ignore e faça conforme solicitado.
 
-Elas estarão guardadas em branches diferentes que vão conter as os arquivos.c. As branches tem o nome de cada atividade.
+### Questão 01
+Faça o fluxograma e um programa que leia dois números
+inteiros e determine qual deles é o maior (não o maior valor) ou se são
+iguais.
 
-### O que é uma branch?
+### Questão 02
+Faça o fluxograma e um programa que leia três
+comprimentos (x, y e z) e responda se eles formam um triângulo, ou seja,
+se x < y + z e y < x + z e z < x + y.
 
-Uma branch é uma espécie de "armazem", nela é guardada os codígos, imagens e todos os tipos de arquivos. Um repositorio pode ter mais de uma brach, cada uma delas pode possuir arquivos diferentes.
+### Questão 03
+Faça um programa para ler o número do dia da semana e
+imprimir seu respectivo nome por extenso. Considere o número 1 como
+domingo, 2 como segunda e etc. Caso o dia da semana seja inválido, exibir
+a mensagem “Dia da Semana invalido”.
 
-<img style="height: auto; width: 50%;" src="https://github.com/AHChaves/Respostas-IP-2023/assets/85091282/55457089-ed00-4613-8bdb-568f68f9aecc"/>
+## Praticando o uso de referências
+
+### Questão 04
+Faça o fluxograma e um programa que leia dois números
+inteiros e uma das operações (soma, subtração, multiplicação, divisão,
+potência e radiciação) e imprima a operação com o resultado.
+
+### Questão 05
+Faça um programa que leia as notas de três provas de
+três alunos e imprime em forma de tabela (um aluno por linha, uma nota
+por coluna) os valores lidos além do conceito dele.
+Todas as notas devem ter duas casas decimais e elas devem ser separadas
+por uma tabulação.
+Conceitos: A[90:100] ; B[80:90[ ; C[70:80[ ; D[60:70[ ; R[0:60[
+
+## Lidando com problemas
+
+### Questão 06
+Faça um programa que leia, nesta ordem, a altura (em
+metros) e o sexo (caractere) e em seguida imprima o peso ideal dela.
+Homens: (72,7 x altura) - 58
+Mulheres: (62,1 x altura) – 44,7
