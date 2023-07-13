@@ -30,16 +30,18 @@ void Questao1() {// Roda a questao 1
 void Questao2() { // Roda a questao 2
 
     //Variaveis
-    int num1, num2, num3, num4, num5, result;
+    int valorX, valorY, valorZ;
 
     //atribui o valor as variaveis
-    printf("Insira o valor dos 5 números:\n");
-    scanf("%d %d %d %d %d", &num1, &num2, &num3, &num4, &num5);
+    printf("Insira o valor de X, Y e Z\n");
+    scanf("%d %d %d", &valorX, &valorY, &valorZ);
 
-    //atribui o valor da soma dos numeros a result
-    result = num1 + num2 + num3 + num4 + num5;
-
-    printf("O resultado da soma é: %d", result);
+    if(valorX < valorY + valorZ && valorY < valorZ + valorX && valorZ < valorX + valorY) {
+        printf("Os valores X, Y e Z formam um triangulo!!\n");
+    }
+    else{
+        printf("Os valores X, Y e Z não formam um triangulo!!\n");
+    }
 } 
 
 void Questao3() {} // Roda a questao 3
