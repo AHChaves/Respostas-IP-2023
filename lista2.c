@@ -36,15 +36,63 @@ void Questao2() { // Roda a questao 2
     printf("Insira o valor de X, Y e Z\n");
     scanf("%d %d %d", &valorX, &valorY, &valorZ);
 
+    /*
+    * Se o valor de X for menor que a soma dos outros o codigo passa para dentro das chaves, o mesmo se aplica nas outras situacoes 
+    * (O operador '&&' significa 'e se' ou também a ja conhecida porta AND)
+    */
     if(valorX < valorY + valorZ && valorY < valorZ + valorX && valorZ < valorX + valorY) {
         printf("Os valores X, Y e Z formam um triangulo!!\n");
     }
-    else{
+    else{ //se nao foi atendido nenhuma das condicoes entao vai ser executado o que esta dentro das seguintes chaves
         printf("Os valores X, Y e Z não formam um triangulo!!\n");
     }
 } 
 
-void Questao3() {} // Roda a questao 3
+void Questao3() {// Roda a questao 3
+
+    //Variaveis
+    int dia;
+
+    //atribui o valor inserido na variavel dia
+    printf("Que dia da semana é hoje:");
+    scanf("%d", &dia);
+
+    switch (dia)
+    {
+    case 1: {
+        printf("Domingo");
+        break;
+    }
+    case 2:{
+        printf("Segunda");
+        break;
+    }
+    case 3:{
+        printf("Terça-Feira");
+        break;
+    }
+    case 4:{
+        printf("Quarta-Feira");
+        break;
+    }
+    case 5:{ 
+        printf("Quinta-Feira");
+        break;
+    }
+    case 6:{
+        printf("Sexta-Feira");
+        break;
+    }
+    case 7:{ 
+        printf("Sábado");
+        break;
+    }
+    default:
+        printf("Dia invalido");
+        break;
+    }
+
+} 
 
 void Questao4() {} // Roda a questao 4
 
