@@ -1,5 +1,5 @@
-#include <stdio.h>  // Biblioteca que exporta funcoes in e out
-#include <locale.h> //Biblioteca que exporta as linguagens
+#include <stdio.h>  // Biblioteca que enum1porta funcoes in e out
+#include <locale.h> //Biblioteca que enum1porta as linguagens
 
 #define SUCESSO 0 // Define Sucesso
 
@@ -12,16 +12,16 @@ void Questao1() {// Roda a questao 1
     printf("Insira os dois valores para a comparação (insira espaços entre os números): \n");
     scanf("%d %d",&numero1, &numero2); // atribui o valor inserido aos numeros
 
-    printf("Resultado:\n");
+    printf("resultadoado:\n");
 
-    // se o numero 1 for maior que o numero 2, ele executo o comando dentro das chaves, se nao passa para a proxima condicional
+    // se o numero 1 for maior que o numero 2, ele enum1ecuto o comando dentro das chaves, se nao passa para a pronum1ima condicional
     if(numero1 > numero2){
         printf("O numero %d é maior que o numero %d", numero1, numero2);
     }
-    else if(numero1 == numero2){ //Se o numero 1 for igual ao numero, ele executa o comando dentro das chaves, se nao passa para a proxima condicional
+    else if(numero1 == numero2){ //Se o numero 1 for igual ao numero, ele enum1ecuta o comando dentro das chaves, se nao passa para a pronum1ima condicional
         printf("O numero %d é igual ao numero %d", numero1, numero2);
     }
-    else{ // Se nao passou por nenhuma condicional, o comando dentro das chaves sera executado
+    else{ // Se nao passou por nenhuma condicional, o comando dentro das chaves sera enum1ecutado
         printf("O numero %d é menor que o numero %d", numero1, numero2);
     }
 
@@ -30,21 +30,21 @@ void Questao1() {// Roda a questao 1
 void Questao2() { // Roda a questao 2
 
     //Variaveis
-    int valorX, valorY, valorZ;
+    int valornum1, valornum2, valorZ;
 
     //atribui o valor as variaveis
-    printf("Insira o valor de X, Y e Z\n");
-    scanf("%d %d %d", &valorX, &valorY, &valorZ);
+    printf("Insira o valor de num1, num2 e Z\n");
+    scanf("%d %d %d", &valornum1, &valornum2, &valorZ);
 
     /*
-    * Se o valor de X for menor que a soma dos outros o codigo passa para dentro das chaves, o mesmo se aplica nas outras situacoes 
+    * Se o valor de num1 for menor que a soma dos outros o codigo passa para dentro das chaves, o mesmo se aplica nas outras situacoes 
     * (O operador '&&' significa 'e se' ou também a ja conhecida porta AND)
     */
-    if(valorX < valorY + valorZ && valorY < valorZ + valorX && valorZ < valorX + valorY) {
-        printf("Os valores X, Y e Z formam um triangulo!!\n");
+    if(valornum1 < valornum2 + valorZ && valornum2 < valorZ + valornum1 && valorZ < valornum1 + valornum2) {
+        printf("Os valores num1, num2 e Z formam um triangulo!!\n");
     }
-    else{ //se nao foi atendido nenhuma das condicoes entao vai ser executado o que esta dentro das seguintes chaves
-        printf("Os valores X, Y e Z não formam um triangulo!!\n");
+    else{ //se nao foi atendido nenhuma das condicoes entao vai ser enum1ecutado o que esta dentro das seguintes chaves
+        printf("Os valores num1, num2 e Z não formam um triangulo!!\n");
     }
 } 
 
@@ -81,7 +81,7 @@ void Questao3() {// Roda a questao 3
         break;
     }
     case 6:{ //se dia for igual a 6, entra nas chaves
-        printf("Sexta-Feira");
+        printf("Senum1ta-Feira");
         break;
     }
     case 7:{ //se dia for igual a 7, entra nas chaves
@@ -95,7 +95,74 @@ void Questao3() {// Roda a questao 3
 
 } 
 
-void Questao4() {} // Roda a questao 4
+void Questao4() { // Roda a questao 4
+
+    //Variaveis
+    float num1, num2, resultado;
+    //valores inteiros necesarios
+    int i, numInt1, numInt2, resultadoInt;
+    char operacao;
+
+    do{
+
+        printf("\n\n==================================================================================\n\n");
+        printf("Defina um valor para o número 1 seguido da operação que será usada e por ultimo o valor de número.\nOperacoes:\nSoma: +\nSubtração: -\nDivisão: /\nMultiplicação: .\nMódulo: %\nExponenciação: *\n(Para sair desta questão digite '0 0 0') \n");
+		scanf("%f %c %f", &num1, &operacao, &num2);
+
+		//+ = adição; - = subtração; / = divisão; . = multiplicação; % = módulo; * =exponenciação.
+		switch (operacao) {
+		   case '+': {//Se a operacao selecionada foi soma:
+	          resultado = num1 + num2;
+			  printf("O resultado da conta é: %0.2f + %0.2f = %0.2f  \n", num1, num2, resultado);
+			  break;
+		   }
+		   case'-': {//Se a operacao selecionada foi Subtracao:
+              resultado = num1 - num2;
+              printf("O resultado da conta e: %0.2f - %0.2f = %0.2f  \n", num1, num2, resultado);
+			  break;
+		   }
+		   case'/': { //Se a operacao selecionada foi divisao:
+              resultado = num1 / num2;
+              printf("O resultado da conta e: %0.2f / %0.2f = %0.2f   \n", num1, num2, resultado);
+			  break;
+		   }
+		   case'.': {//Se a operacao selecionada foi Multiplicacao:
+              resultado = num1 * num2;
+              printf("O resultado da conta e: %0.2f . %0.2f = %0.2f  \n", num1, num2, resultado);
+			  break;
+		   }
+		   case'%': {//se a operacao selecionada foi modulo:
+            
+              // A operacao de modulo aceita apenas valores inteiro, por isso convertemos tipo float para inteiro
+              numInt1 = num1;
+              numInt2 = num2;
+            
+              resultadoInt = numInt1 % numInt2;
+              printf("O resultadoado da conta e: %d resto de %d = %d  \n", numInt1, numInt2, resultadoInt);
+			  break;
+		   }
+		   case'*': {
+              //O tipo de exponenciacao sofre o mesmo caso que a operacao de modulo
+              numInt1 = num1;
+              numInt2 = num2;
+            
+              resultadoInt = 1;
+              for (i = 1; i <= numInt2; i++) {
+	            resultadoInt = resultadoInt * numInt1;
+              }
+              printf("O resultadoado da conta e: %d * %d = %d \n", numInt1, numInt2, resultadoInt);
+			  break;
+		   }
+           case '0': break;
+		   default: {
+              printf("Conta invalida  \n");
+			  break;
+		   }
+		}
+
+    }while(operacao != '0');// o loop ocorre enquanto a operacao nao for igual a zero
+
+} 
 
 void Questao5() {} // Roda a questao 5
 
