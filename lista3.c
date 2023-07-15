@@ -30,7 +30,7 @@ int main(int argc, char **argv)
         printf("================================\n");
 
         // Mostra as opcoes disponiveis
-        printf("Escolha uma das opÁıes:\n[1] Quest„o 1\n[2] Quest„o 2\n[3] Quest„o 3\n[4] Quest„o 4\n[5] Quest„o 5\n[6] Quest„o 6\n[7] Quest„o 7\n[0] Fechar programa\nEscolha:\t");
+        printf("Escolha uma das op√ß√µes:\n[1] Quest√£o 1\n[2] Quest√£o 2\n[3] Quest√£o 3\n[4] Quest√£o 4\n[5] Quest√£o 5\n[6] Quest√£o 6\n[7] Quest√£o 7\n[0] Fechar programa\nEscolha:\t");
         scanf("%d", &escolha);
 
         switch (escolha)
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
         default:
         {
             printf("\e[1;1H\e[2J");
-            printf("\nOpÁ„o invalida!!!\n");
+            printf("\nOp√ß√£o invalida!!!\n");
         }
         }
 
