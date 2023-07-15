@@ -12,7 +12,7 @@ void Questao1() {// Roda a questao 1
     printf("Insira os dois valores para a comparação (insira espaços entre os números): \n");
     scanf("%d %d",&numero1, &numero2); // atribui o valor inserido aos numeros
 
-    printf("resultadoado:\n");
+    printf("resultado:\n");
 
     // se o numero 1 for maior que o numero 2, ele enum1ecuto o comando dentro das chaves, se nao passa para a pronum1ima condicional
     if(numero1 > numero2){
@@ -30,21 +30,21 @@ void Questao1() {// Roda a questao 1
 void Questao2() { // Roda a questao 2
 
     //Variaveis
-    int valornum1, valornum2, valorZ;
+    int valorX, valorY, valorZ;
 
     //atribui o valor as variaveis
-    printf("Insira o valor de num1, num2 e Z\n");
-    scanf("%d %d %d", &valornum1, &valornum2, &valorZ);
+    printf("Insira o valor de X, Y e Z\n");
+    scanf("%d %d %d", &valorX, &valorY, &valorZ);
 
     /*
-    * Se o valor de num1 for menor que a soma dos outros o codigo passa para dentro das chaves, o mesmo se aplica nas outras situacoes 
-    * (O operador '&&' significa 'e se' ou também a ja conhecida porta AND)
+    * Se o valor de valorX for menor que a soma dos outros o codigo passa para dentro das chaves, o mesmo se aplica nas outras situacoes 
+    * (O operador '&&' significa 'e se' ou tambem a ja conhecida porta AND)
     */
-    if(valornum1 < valornum2 + valorZ && valornum2 < valorZ + valornum1 && valorZ < valornum1 + valornum2) {
-        printf("Os valores num1, num2 e Z formam um triangulo!!\n");
+    if(valorX < valorY + valorZ && valorY < valorZ + valorX && valorZ < valorX + valorY) {
+        printf("Os valores X, Y e Z formam um triangulo!!\n");
     }
     else{ //se nao foi atendido nenhuma das condicoes entao vai ser enum1ecutado o que esta dentro das seguintes chaves
-        printf("Os valores num1, num2 e Z não formam um triangulo!!\n");
+        printf("Os valores X, Y e Z não formam um triangulo!!\n");
     }
 } 
 
@@ -65,7 +65,7 @@ void Questao3() {// Roda a questao 3
         break;
     }
     case 2:{ //se dia for igual a 2, entra nas chaves
-        printf("Segunda");
+        printf("Segunda-Feira");
         break;
     }
     case 3:{ //se dia for igual a 3, entra nas chaves
@@ -81,7 +81,7 @@ void Questao3() {// Roda a questao 3
         break;
     }
     case 6:{ //se dia for igual a 6, entra nas chaves
-        printf("Senum1ta-Feira");
+        printf("Sexta-Feira");
         break;
     }
     case 7:{ //se dia for igual a 7, entra nas chaves
@@ -106,14 +106,14 @@ void Questao4() { // Roda a questao 4
     do{
 
         printf("\n\n==================================================================================\n\n");
-        printf("Defina um valor para o número 1 seguido da operação que será usada e por ultimo o valor de número.\nOperacoes:\nSoma: +\nSubtração: -\nDivisão: /\nMultiplicação: .\nMódulo: %\nExponenciação: *\n(Para sair desta questão digite '0 0 0') \n");
+        printf("Defina um valor para o número 1 seguido da operação que será usada e por ultimo o valor de número.\nOperações:\nSoma: +\nSubtração: -\nDivisão: /\nMultiplicação: .\nMódulo: %\nExponenciação: *\n(Para sair desta questão digite '0 0 0') \n");
 		scanf("%f %c %f", &num1, &operacao, &num2);
 
-		//+ = adição; - = subtração; / = divisão; . = multiplicação; % = módulo; * =exponenciação.
+		//+ = adiÃcaoo; - = subtracao; / = divisao; . = multiplicacao; % = mpdulo; * =exponenciacao.
 		switch (operacao) {
 		   case '+': {//Se a operacao selecionada foi soma:
 	          resultado = num1 + num2;
-			  printf("O resultado da conta é: %0.2f + %0.2f = %0.2f  \n", num1, num2, resultado);
+			  printf("O resultado da conta Ã©: %0.2f + %0.2f = %0.2f  \n", num1, num2, resultado);
 			  break;
 		   }
 		   case'-': {//Se a operacao selecionada foi Subtracao:
@@ -183,7 +183,7 @@ int main(int argc, char **argv)
         printf("\n\n================================\n");
 
         // Mostra as opcoes disponiveis
-        printf("Escolha uma das opções:\n[1] Questão 1\n[2] Questão 2\n[3] Questão 3\n[4] Questão 4\n[5] Questão 5\n[6] Questão 6\n[7] Questão 7\n[0] Fechar programa\nEscolha:\t");
+        printf("Escolha uma das operações:\n[1] Questão 1\n[2] Questão 2\n[3] Questão 3\n[4] Questão 4\n[5] Questão 5\n[6] Questão 6\n[7] Questão 7\n[0] Fechar programa\nEscolha:\t");
         scanf("%d", &escolha);
 
         switch (escolha)
@@ -248,7 +248,7 @@ int main(int argc, char **argv)
         default:
         {
             printf("\e[1;1H\e[2J");
-            printf("\nOpÃ§ão invalida!!!\n");
+            printf("\nOperação invalida!!!\n");
         }
         }
 
