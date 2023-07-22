@@ -113,22 +113,22 @@ void Questao4() { // Roda a questao 4
 		switch (operacao) {
 		   case '+': {//Se a operacao selecionada foi soma:
 	          resultado = num1 + num2;
-			  printf("O resultado da conta Ã©: %0.2f + %0.2f = %0.2f  \n", num1, num2, resultado);
+			  printf("O resultado da conta é: %0.2f + %0.2f = %0.2f  \n", num1, num2, resultado);
 			  break;
 		   }
 		   case'-': {//Se a operacao selecionada foi Subtracao:
               resultado = num1 - num2;
-              printf("O resultado da conta e: %0.2f - %0.2f = %0.2f  \n", num1, num2, resultado);
+              printf("O resultado da conta é: %0.2f - %0.2f = %0.2f  \n", num1, num2, resultado);
 			  break;
 		   }
 		   case'/': { //Se a operacao selecionada foi divisao:
               resultado = num1 / num2;
-              printf("O resultado da conta e: %0.2f / %0.2f = %0.2f   \n", num1, num2, resultado);
+              printf("O resultado da conta é: %0.2f / %0.2f = %0.2f   \n", num1, num2, resultado);
 			  break;
 		   }
 		   case'.': {//Se a operacao selecionada foi Multiplicacao:
               resultado = num1 * num2;
-              printf("O resultado da conta e: %0.2f . %0.2f = %0.2f  \n", num1, num2, resultado);
+              printf("O resultado da conta é: %0.2f . %0.2f = %0.2f  \n", num1, num2, resultado);
 			  break;
 		   }
 		   case'%': {//se a operacao selecionada foi modulo:
@@ -138,7 +138,7 @@ void Questao4() { // Roda a questao 4
               numInt2 = num2;
             
               resultadoInt = numInt1 % numInt2;
-              printf("O resultadoado da conta e: %d resto de %d = %d  \n", numInt1, numInt2, resultadoInt);
+              printf("O resultadoado da conta é: %d resto de %d = %d  \n", numInt1, numInt2, resultadoInt);
 			  break;
 		   }
 		   case'*': {
@@ -147,10 +147,12 @@ void Questao4() { // Roda a questao 4
               numInt2 = num2;
             
               resultadoInt = 1;
+              
               for (i = 1; i <= numInt2; i++) {
 	            resultadoInt = resultadoInt * numInt1;
               }
-              printf("O resultadoado da conta e: %d * %d = %d \n", numInt1, numInt2, resultadoInt);
+
+              printf("O resultadoado da conta é: %d * %d = %d \n", numInt1, numInt2, resultadoInt);
 			  break;
 		   }
            case '0': break;
