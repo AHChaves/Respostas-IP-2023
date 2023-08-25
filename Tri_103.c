@@ -74,11 +74,11 @@ int ProcuraAlunos(aluno_s *alunos, int numAlunos)
     {
         if (procurado == alunos[i].matricula)
         {
-            return i; // retorna a posicao da alunos se o matricula informado pelo usuario for valido
+            return i; // retorna a posicao da alunos se o matricula informado pelo usuario for valida
         }
     }
 
-    return -1; // se o matricula nao for valido retorna -1
+    return -1; // se o matricula nao for valida retorna -1
 }
 
 void AdicionaAtividades(aluno_s *alunos)
@@ -149,7 +149,7 @@ void AdicionaAtividades(aluno_s *alunos)
 }
 
 void ListarAlunos(aluno_s *alunos, int numAlunos)
-{ // funcao que lista todas as alunos em formato de tabela
+{ // funcao que lista todos os alunos em formato de tabela
     int i;
 
     printf("%-20s|%-20s|%-20s|%-20s\n", "Nome", "Curso", "Matricula", "Numero de atividades");
@@ -161,7 +161,7 @@ void ListarAlunos(aluno_s *alunos, int numAlunos)
 }
 
 void MostrarAlunos(aluno_s *alunos)
-{ // funcao que informa os dados de uma alunos especifica
+{ // funcao que informa os dados de um aluno especifico
     int i;
 
     printf("Nome: %s\n", alunos->nome);
@@ -211,18 +211,18 @@ int main(int argc, char **argv)
         {
             alunoProcurado = ProcuraAlunos(alunos, numAlunos); // o valor que for retornado da funcao Procuraalunos eh atribuido a alunoProcurado
             if (alunoProcurado == -1)
-            { // se esse numero for igual a -1 o Matricula informado eh invalido
+            { // se esse numero for igual a -1 a matricula informado eh invalida
                 printf("Matricula do aluno invalida!!!\n");
             }
             else
             {
-                AdicionaAtividades(&alunos[alunoProcurado]); // se ele for diferente de -1 eh valido
+                AdicionaAtividades(&alunos[alunoProcurado]); // se ela for diferente de -1 eh valida
             }
             break;
         }
         case 3:
         {
-            ListarAlunos(alunos, numAlunos); // lista todas as alunoss
+            ListarAlunos(alunos, numAlunos); // lista todas os alunos
             break;
         }
         case 4:
