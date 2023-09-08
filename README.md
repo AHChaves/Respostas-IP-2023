@@ -1,14 +1,9 @@
 ###Perfil
 Um perfil do sistema é um registro único composto pelas seguintes
 informações:
-• ID: Identificador único do perfil. Esse identificador deverá ser
-utilizado para fazer todas as ligações entre um perfil e qualquer
-outro elemento do sistema.
+• ID: Identificador único do perfil. Esse identificador deverá ser utilizado para fazer todas as ligações entre um perfil e qualquer outro elemento do sistema.
 • Nome: Nome do usuário
-• E-mail: E-mail do usuário. Deve ser um e-mail válido no sentido de
-que deve possuir um @ seguido de um domínio. O e-mail que é deverá
-ser utilizado para logar no sistema. Não pode existir mais de um
-e-mail igual cadastrado no sistema.
+• E-mail: E-mail do usuário. Deve ser um e-mail válido no sentido de que deve possuir um @ seguido de um domínio. O e-mail que é deverá ser utilizado para logar no sistema. Não pode existir mais de um e-mail igual cadastrado no sistema.
 • Senha: Senha utilizada para logar no sistema.
 
 ###Ações:
@@ -16,27 +11,18 @@ e-mail igual cadastrado no sistema.
 estejam cadastrados no sistema, o perfil encontrado passa a estar
 LOGADO.
 • Deslogar: O perfil atualmente logado é deslogado.
-• Listar: Lista, em formato de tabela, todos os perfis cadastrados
-no sistema. O sistema deve oferecer as opções de listar ordenado
-pelo ID, nome ou e-mail.
-• Buscar: Buscar por perfis através de parte do nome e/ou e-mail. O
-sistema deve oferecer as opções de listar ordenado pelo ID, nome
-ou e-mail.
-• Visitar: Ativa um determinado perfil para receber ações dos outros
-módulos, mas não troca o usuário logado. É semelhante ao processo
-de abrir um perfil para verificar o que ele possui.
+• Listar: Lista, em formato de tabela, todos os perfis cadastrados no sistema. O sistema deve oferecer as opções de listar ordenado pelo ID, nome ou e-mail.
+• Buscar: Buscar por perfis através de parte do nome e/ou e-mail. O sistema deve oferecer as opções de listar ordenado pelo ID, nome ou e-mail.
+• Visitar: Ativa um determinado perfil para receber ações dos outros módulos, mas não troca o usuário logado. É semelhante ao processo de abrir um perfil para verificar o que ele possui.
 
 ###Postagens
-Uma postagem é o registro de uma ou mais imagens com descrição associado
-à um usuário. As informações de uma postagem são:
+Uma postagem é o registro de uma ou mais imagens com descrição associado à um usuário. As informações de uma postagem são:
 
-• ID: Identificador único fornecido pelo sistema para identificar uma
-postagem.
+• ID: Identificador único fornecido pelo sistema para identificar uma postagem.
 • Imagens: Lista de imagens em ASCII.
 • Descrição: Texto descritivo a ser impresso logo após a(s)
 imagem(ns).
-• Comentários: Lista de comentários feitos por outros usuários na
-referida postagem.
+• Comentários: Lista de comentários feitos por outros usuários na referida postagem.
 • Curtidas: Lista dos usuários que curtiram a postagem.
 
 ###Ações:

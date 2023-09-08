@@ -9,15 +9,21 @@ typedef struct perfil_t{
 
 void util_removeQuebraLinhaFinal(char dados[]);
 
-void AtribuiIDConta(perfil_s *perfil, int numPerfil);
+void SortPerfils(perfil_s* perfil, char** info);
 
-void Email(perfil_s* perfil, int numPerfil);
+int NoOfUsers();
 
-void Cadastro(perfil_s* perfil, int numPerfil);
+void AtribuiIDConta(perfil_s perfil, FILE* users);
 
-void Login(perfil_s* perfil);
+void Email(perfil_s perfil, FILE* users);
 
-void Listar(perfil_s* perfil);
+void Cadastro();
+
+int Login(perfil_s perfil_logado);
+
+void PrintInfos(perfil_s* perfil);
+
+void Listar();
 
 void Busca(perfil_s* perfil);
 

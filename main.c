@@ -1,111 +1,58 @@
-#include <stdio.h>  // Biblioteca que exporta funcoes in e out
-#include <locale.h> //Biblioteca que exporta as linguagens
+#include <stdio.h> 
+#include <stdbool.h>
+#include "perfil.h"
 
-#define SUCESSO 0 // Define Sucesso
+#define SUCESSO 0 
 
-void Questao1() {} // Roda a questao 1
-
-void Questao2() {} // Roda a questao 2
-
-void Questao3() {} // Roda a questao 3
-
-void Questao4() {} // Roda a questao 4
-
-void Questao5() {} // Roda a questao 5
-
-void Questao6() {} // Roda a questao 6
-
-void Questao7() {} // Roda a questao 7
+bool file_exists(const char *filename)
+{
+    FILE *fp = fopen(filename, "r");
+    bool file_exist = false;
+    if (fp != NULL)
+    {
+        file_exist = true;
+        fclose(fp); // close the file
+    }
+    return file_exist;
+}
 
 int main(int argc, char **argv)
 {
+    FILE* users;
+    perfil_s perfilLogado;
+    int opcao;
 
-    setlocale(LC_ALL, ""); // atribui a linguagem para o codigo
+    if (!file_exists("users.txt"))
+        users = fopen("users.txt", "w");
+    fclose(users);
 
-    int escolha;
+    do{
 
-    do
-    {
+        printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\nEscolha: ");
+        scanf("%d", &opcao);
 
-        printf("================================\n");
-
-        // Mostra as opcoes disponiveis
-        printf("Escolha uma das opções:\n[1] Questão 1\n[2] Questão 2\n[3] Questão 3\n[4] Questão 4\n[5] Questão 5\n[6] Questão 6\n[7] Questão 7\n[0] Fechar programa\nEscolha:\t");
-        scanf("%d", &escolha);
-
-        switch (escolha)
+        switch (opcao)
         {
-        case 0:
-            break;
-
-        case 1:
-        {
-            printf("\e[1;1H\e[2J"); //printf que apaga o terminal
-
-            Questao1(); //Chama a questao 1
-
-            printf("\e[1;1H\e[2J");
+        case 0: break;
+        case 1: {
+            Cadastro();
             break;
         }
-        case 2:
-        {
-            printf("\e[1;1H\e[2J");
-
-            Questao2();
-
-            printf("\e[1;1H\e[2J");
+        case 2: {
+            Login(perfilLogado);
             break;
         }
-        case 3:
-        {
-            printf("\e[1;1H\e[2J");
-
-            Questao3();
-
-            printf("\e[1;1H\e[2J");
+        case 3: {
+            Listar();
             break;
         }
-        case 4:
-        {
-            printf("\e[1;1H\e[2J");
-
-            Questao4();
-
-            printf("\e[1;1H\e[2J");
+        default: {
+            printf("Opcao Invalida!!!\n");
             break;
         }
-        case 5:
-        {
-            printf("\e[1;1H\e[2J");
-
-            Questao5();
-
-            printf("\e[1;1H\e[2J");
-            break;
-        }
-        case 6:
-        {
-            printf("\e[1;1H\e[2J");
-            Questao6();
-            break;
-        }
-        case 7:
-        {
-            printf("\e[1;1H\e[2J");
-
-            Questao7();
-
-            printf("\e[1;1H\e[2J");
-            break;
-        }
-        default:
-        {
-            printf("\e[1;1H\e[2J");
-            printf("\nOpção invalida!!!\n");
-        }
         }
 
-    } while (escolha != 0);
+    }while(opcao != 0);
 
     return SUCESSO;
 }
