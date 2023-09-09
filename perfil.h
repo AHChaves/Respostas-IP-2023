@@ -13,15 +13,17 @@ void SortPerfils(perfil_s* perfil, char** info);
 
 int NoOfUsers();
 
-void AtribuiIDConta(perfil_s perfil, FILE* users);
+void AtribuiIDConta(perfil_s* perfil);
 
-void Email(perfil_s perfil, FILE* users);
+void Email(perfil_s* perfil);
 
 void Cadastro();
 
 int Login(perfil_s perfil_logado);
 
 void PrintInfos(perfil_s* perfil);
+
+void FreeMatriz(char** matriz);
 
 void Listar();
 

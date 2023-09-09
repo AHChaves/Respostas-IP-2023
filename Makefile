@@ -1,11 +1,9 @@
-coltegram: 
-	gcc main.o perfil.o -o coltegram
 
-main.o: main.c
-	gcc -c main.c
+all: perfil.o
+	gcc main.c perfil.o -o coltegram
 
-perfil.o: perfil.c perfil.h
-	gcc  -c perfil.c
+perfil.o: perfil.h
+	gcc -c perfil.c
 
 clean:
-	rm *.o coltegram
+	rm -r *.o 

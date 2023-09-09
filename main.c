@@ -6,7 +6,7 @@
 
 bool file_exists(const char *filename)
 {
-    FILE *fp = fopen(filename, "r");
+    FILE * fp = fopen(filename, "r");
     bool file_exist = false;
     if (fp != NULL)
     {
@@ -22,14 +22,15 @@ int main(int argc, char **argv)
     perfil_s perfilLogado;
     int opcao;
 
-    if (!file_exists("users.txt"))
+    if (!file_exists("users.txt")){
         users = fopen("users.txt", "w");
-    fclose(users);
+        fclose(users);
+    }
 
     do{
 
         printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\nEscolha: ");
-        scanf("%d", &opcao);
+        scanf("%d%*c", &opcao);
 
         switch (opcao)
         {

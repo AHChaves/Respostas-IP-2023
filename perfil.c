@@ -1,9 +1,11 @@
 #include <stdio.h>
-#include <time.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
 #include "perfil.h"
+
+#define POS_ZERO 0
 
 void util_removeQuebraLinhaFinal(char dados[]) {
     int tamanho;
@@ -16,32 +18,34 @@ void util_removeQuebraLinhaFinal(char dados[]) {
 void SortPerfils(perfil_s* perfil, char** info){
 
     perfil_s swamp;
-    char* tmpId, *tmpNextId;
+    char tmpInfo[STRING_SIZE], tmpNextInfo[STRING_SIZE];
     int i, j, tamId, tamNextId, menorTam;
 
     for(i = 0; i < (NoOfUsers() - 1); i++){
-        strcpy(tmpId, info[i]);
-        strcpy(tmpNextId, info[i+1]);
+        strcpy(tmpInfo, info[i]);
+        strcpy(tmpNextInfo, info[i+1]);
 
-        tamId = strlen(tmpId);
-        tamNextId = strlen(tmpNextId);
+        printf("%s %s", tmpInfo, tmpNextInfo);
+
+        tamId = strlen(tmpInfo);
+        tamNextId = strlen(tmpNextInfo);
 
         for(j = 0; j < tamNextId; j++)
-            tmpNextId[j] = tolower(tmpNextId[j]);
+            tmpNextInfo[j] = tolower(tmpNextInfo[j]);
 
         for(j = 0; j < tamId; j++)
-            tmpId[j] = tolower(tmpId[j]);
+            tmpInfo[j] = tolower(tmpInfo[j]);
 
-        menorTam = tamId > tamNextId ? tamNextId : tamId;
+        menorTam = (tamId > tamNextId) ? tamNextId : tamId;
 
         for(j = 0; j < menorTam; j++){
-            if(tmpId[j] > tmpNextId[j]){
+            if(tmpInfo[j] > tmpNextInfo[j]){
                 swamp = perfil[i];
                 perfil[i] = perfil[i+1];
                 perfil[i+1] = swamp;
                 break;
             }
-            else if(tmpId[j] < tmpNextId[j])
+            else if(tmpInfo[j] < tmpNextInfo[j])
                 break;
         }
         
@@ -64,22 +68,24 @@ int NoOfUsers(){
     return number;
 }
 
-void AtribuiIDConta(perfil_s perfil, FILE* users){
-
+void AtribuiIDConta(perfil_s* perfil){
+    
+    FILE* listOfusers;
     perfil_s perfils;
 
-
-    char tmpID[STRING_SIZE];
+    char tmpInfo[STRING_SIZE];
     bool usedID = false;
+
+    listOfusers = fopen("users.txt", "r");
 
     do{
 
-        getchar();
         printf("Digite o nome da conta: ");
-        fgets(tmpID, STRING_SIZE, stdin);
+        fgets(tmpInfo, STRING_SIZE, stdin);
+        util_removeQuebraLinhaFinal(tmpInfo);
 
-        while(fread(&perfils, sizeof(perfil_s),1, users)){
-            if(strcmp(perfils.id, tmpID) == 0){
+        while(fread(&perfils, sizeof(perfil_s),1, listOfusers)){
+            if(strcmp(perfils.id, tmpInfo) == 0){
                 usedID = true;
                 break;
             }
@@ -88,14 +94,19 @@ void AtribuiIDConta(perfil_s perfil, FILE* users){
 
         if(usedID) printf("Nome da conta invalido!!\n");
 
-    }while(!usedID);
+    }while(usedID);
 
-    strcpy(perfil.id, tmpID);
+    fclose(listOfusers);
+
+    strcpy(perfil->id, tmpInfo);
 }
 
-void Email(perfil_s perfil, FILE* users){
+void Email(perfil_s* perfil){
 
     perfil_s perfils;
+    FILE* listOfusers;
+
+    listOfusers = fopen("users.txt", "r");
 
     int i, j;
     char tmpEmail[STRING_SIZE];
@@ -103,22 +114,25 @@ void Email(perfil_s perfil, FILE* users){
 
     do{
         j = 0;
-
-        getchar();
         printf("Digite um email: ");
         fgets(tmpEmail, STRING_SIZE, stdin);
         util_removeQuebraLinhaFinal(tmpEmail);
 
         for(i = 0; i < strlen(tmpEmail); i++){
-            arrobaPresent = tmpEmail[i] == '@' ? true: false;
-            j++;
+            if(tmpEmail[i] == '@'){
+                arrobaPresent = true;
+                j=i;
+            }
         }
 
-        for(i = j; i < strlen(tmpEmail); i++)
-            dotPresent = tmpEmail[i] == '.' ? true : false;
+        for(j; j < strlen(tmpEmail); j++){
+            if(tmpEmail[j] == '.'){
+                dotPresent = true;
+            }
+        }
 
         if(dotPresent && arrobaPresent){
-            while(fread(&perfils, sizeof(perfil_s),1, users)){
+            while(fread(&perfils, sizeof(perfil_s),1, listOfusers)){
                 if(strcmp(tmpEmail, perfils.email) == 0 ){
                     usedEmail = true;
                     break;
@@ -130,37 +144,40 @@ void Email(perfil_s perfil, FILE* users){
         if(dotPresent && arrobaPresent && !usedEmail){
             validEmail = true;
         }
-        else if(dotPresent && arrobaPresent && !usedEmail) printf("Email ja em uso!\n");
+        else if(dotPresent && arrobaPresent && usedEmail) printf("Email ja em uso!\n");
         
     }while(!validEmail);
 
-    strcpy(perfil.email, tmpEmail);
+    fclose(listOfusers);
+
+    strcpy(perfil->email, tmpEmail);
 }
 
 void Cadastro(){
     
     FILE* users;
 
-    perfil_s perfil;
+    perfil_s* perfil;
 
-    users = fopen("users.txt", "a");
+    perfil = (perfil_s*)calloc(1, sizeof(perfil_s));
+    users = fopen("users.txt", "ab");
 
-    AtribuiIDConta(perfil, users);
+    AtribuiIDConta(&perfil[POS_ZERO]);
 
-    getchar();
     printf("Digite seu nome: ");
-    fgets(perfil.name, STRING_SIZE, stdin);
-    util_removeQuebraLinhaFinal(perfil.name);
+    fgets(perfil[POS_ZERO].name, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(perfil[POS_ZERO].name);
 
-    Email(perfil, users);
+    Email(&perfil[POS_ZERO]);
 
     printf("informe uma senha para a conta: ");
-    fgets(perfil.password, STRING_SIZE, stdin);
+    fgets(perfil[POS_ZERO].password, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(perfil[POS_ZERO].password);
 
-    fwrite(&perfil, sizeof(perfil_s), 1, users);
+    fwrite(&perfil[POS_ZERO], sizeof(perfil_s), 1, users);
 
+    free(perfil);
     fclose(users);
-
 }
 
 int Login(perfil_s perfil_logado){
@@ -168,30 +185,36 @@ int Login(perfil_s perfil_logado){
     FILE * users;
     perfil_s perfils;
 
-    users = fopen("users.txt","r");
+    users = fopen("users.txt","rb");
 
     char idOuEmail[STRING_SIZE], senha[STRING_SIZE];
-    int i, indice;
+    int i = 0, indice;
     bool validId = false, validEmail = false;
 
     printf("Informe o nome ou email do perfil ao qual esta tentando logar: ");
-    scanf("%d",&idOuEmail);
-    while(!validEmail || !validId || fread(&perfils, sizeof(perfil_s), 1, users) ){
+    fgets(idOuEmail, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(idOuEmail);
+
+    while(fread(&perfils, sizeof(perfil_s), 1, users)){
 
         if(strcmp(idOuEmail, perfils.id) == 0){
             validId = true;
             indice = i;
+            break;
         }
         if(strcmp(idOuEmail, perfils.email) == 0){
             validEmail = true;
             indice = i;
+            break;
         }
-        
+        i++;
     }
 
     if(validEmail || validId) {
         printf("Informe a senha: ");
         fgets(senha, STRING_SIZE, stdin);
+        util_removeQuebraLinhaFinal(senha);
+
         if(strcmp(senha, perfils.password) == 0){
             perfil_logado = perfils;
         }
@@ -203,36 +226,50 @@ int Login(perfil_s perfil_logado){
 }
 
 void PrintInfos(perfil_s* perfil){
-    printf("%-20s | %-50s | %-50s", "User", "Nome", "Email");
+    printf("%-20s | %-50s | %-50s\n", "User", "Nome", "Email");
 
-    for(int i = 0; i < NoOfUsers; i++){
-        printf("%-20s | %-50s | %-50s", perfil[i].id, perfil[i].name, perfil[i].email);
+    for(int i = 0; i < NoOfUsers(); i++){
+        printf("%-20s | %-50s | %-50s\n", perfil[i].id, perfil[i].name, perfil[i].email);
     }
+}
+
+void FreeMatriz(char** matriz){
+    for(int i = 0; i < NoOfUsers(); i++){
+        free(matriz[i]);
+    }
+    free(matriz);
 }
 
 void Listar(){
 
-    FILE* users;
     perfil_s* perfil;
+    FILE* users;
     int i = 0, opcao;
-    char* sortMode[STRING_SIZE];
+    char** sortMode;
     bool validOption = false;
 
-    users = fopen("users.txt","r");
+    sortMode = (char**)malloc(sizeof(char*) * NoOfUsers());
+    perfil = (perfil_s*)malloc(sizeof(perfil_s) * NoOfUsers());
+    users = fopen("users.txt","rb");
 
-    while(fread(&perfil[i], sizeof(perfil_s),1, users)) {
+    while(fread(&perfil[i], sizeof(perfil_s), 1, users)) {
         i++;
     }
+    fclose(users);
 
     do{
         printf("Escolha uma opcao de listagem :\n1 - Id\n2 - Nome\n3 - Email\nopcao: ");
         scanf("%d", &opcao);
 
+        printf("%d", NoOfUsers());
+
         switch (opcao)
         {
         case 1:{
-            for(i = 0; i <NoOfUsers; i++)
+            for(i = 0; i <NoOfUsers(); i++){
+                sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].id);
+            }
 
             SortPerfils(perfil, sortMode);
             PrintInfos(perfil);
@@ -240,8 +277,10 @@ void Listar(){
             break;
         }
         case 2:{
-            for(i = 0; i <NoOfUsers; i++)
+            for(i = 0; i <NoOfUsers(); i++){
+                sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].name);
+            }
 
             SortPerfils(perfil, sortMode);
             PrintInfos(perfil);
@@ -249,8 +288,10 @@ void Listar(){
             break;
         }
         case 3:{
-            for(i = 0; i <NoOfUsers; i++)
+            for(i = 0; i <NoOfUsers(); i++){
+                sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].email);
+            }
 
             SortPerfils(perfil, sortMode);
             PrintInfos(perfil);
@@ -264,5 +305,6 @@ void Listar(){
         }
     }while(!validOption);
    
-    fclose(users);
+    FreeMatriz(sortMode);
+    free(perfil);
 }
