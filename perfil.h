@@ -27,6 +27,6 @@ void FreeMatriz(char** matriz);
 
 void Listar();
 
-void Busca(perfil_s* perfil);
+void Busca();
 
 void Visitar(perfil_s* perfil);

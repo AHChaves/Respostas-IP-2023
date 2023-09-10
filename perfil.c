@@ -5,8 +5,6 @@
 #include <ctype.h>
 #include "perfil.h"
 
-#define POS_ZERO 0
-
 void util_removeQuebraLinhaFinal(char dados[]) {
     int tamanho;
     tamanho = strlen(dados);
@@ -25,8 +23,6 @@ void SortPerfils(perfil_s* perfil, char** info){
         strcpy(tmpInfo, info[i]);
         strcpy(tmpNextInfo, info[i+1]);
 
-        printf("%s %s", tmpInfo, tmpNextInfo);
-
         tamId = strlen(tmpInfo);
         tamNextId = strlen(tmpNextInfo);
 
@@ -34,7 +30,7 @@ void SortPerfils(perfil_s* perfil, char** info){
             tmpNextInfo[j] = tolower(tmpNextInfo[j]);
 
         for(j = 0; j < tamId; j++)
-            tmpInfo[j] = tolower(tmpInfo[j]);
+            tmpInfo[j] = tolower(tmpInfo[j]);   
 
         menorTam = (tamId > tamNextId) ? tamNextId : tamId;
 
@@ -74,11 +70,12 @@ void AtribuiIDConta(perfil_s* perfil){
     perfil_s perfils;
 
     char tmpInfo[STRING_SIZE];
-    bool usedID = false;
+    bool usedID;
 
     listOfusers = fopen("users.txt", "r");
 
     do{
+        usedID = false;
 
         printf("Digite o nome da conta: ");
         fgets(tmpInfo, STRING_SIZE, stdin);
@@ -89,7 +86,6 @@ void AtribuiIDConta(perfil_s* perfil){
                 usedID = true;
                 break;
             }
-
         }
 
         if(usedID) printf("Nome da conta invalido!!\n");
@@ -110,9 +106,12 @@ void Email(perfil_s* perfil){
 
     int i, j;
     char tmpEmail[STRING_SIZE];
-    bool validEmail = false, arrobaPresent = false, dotPresent = false, usedEmail = false;
+    bool validEmail = false, arrobaPresent, dotPresent, usedEmail;
 
     do{
+        usedEmail = false;
+        dotPresent = false;
+        arrobaPresent = false;
         j = 0;
         printf("Digite um email: ");
         fgets(tmpEmail, STRING_SIZE, stdin);
@@ -157,26 +156,26 @@ void Cadastro(){
     
     FILE* users;
 
-    perfil_s* perfil;
+    perfil_s perfil;
 
-    perfil = (perfil_s*)calloc(1, sizeof(perfil_s));
+    //perfil = (perfil_s*)calloc(1, sizeof(perfil_s));
     users = fopen("users.txt", "ab");
 
-    AtribuiIDConta(&perfil[POS_ZERO]);
+    AtribuiIDConta(&perfil);
 
     printf("Digite seu nome: ");
-    fgets(perfil[POS_ZERO].name, STRING_SIZE, stdin);
-    util_removeQuebraLinhaFinal(perfil[POS_ZERO].name);
+    fgets(perfil.name, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(perfil.name);
 
-    Email(&perfil[POS_ZERO]);
+    Email(&perfil);
 
     printf("informe uma senha para a conta: ");
-    fgets(perfil[POS_ZERO].password, STRING_SIZE, stdin);
-    util_removeQuebraLinhaFinal(perfil[POS_ZERO].password);
+    fgets(perfil.password, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(perfil.password);
 
-    fwrite(&perfil[POS_ZERO], sizeof(perfil_s), 1, users);
+    fwrite(&perfil, sizeof(perfil_s), 1, users);
 
-    free(perfil);
+    //free(perfil);
     fclose(users);
 }
 
@@ -261,8 +260,6 @@ void Listar(){
         printf("Escolha uma opcao de listagem :\n1 - Id\n2 - Nome\n3 - Email\nopcao: ");
         scanf("%d", &opcao);
 
-        printf("%d", NoOfUsers());
-
         switch (opcao)
         {
         case 1:{
@@ -307,4 +304,90 @@ void Listar(){
    
     FreeMatriz(sortMode);
     free(perfil);
+}
+
+void TrocaPosNoArray(perfil_s* perfils,int indiceInicio, int posTrocada){
+
+    perfil_s swap;
+
+    swap = perfils[indiceInicio];
+    perfils[indiceInicio] = perfils[posTrocada];
+    perfils[posTrocada] = swap;
+
+}
+
+void FiltraPerfis(perfil_s* perfils, char* procura){
+
+    FILE* users;
+    //perfil_s* tmpPerfils;
+    int i, j, k, procuradoId, procuradoEmail, indiceInit= 0;
+
+    char tmpID[STRING_SIZE], tmpEmail[STRING_SIZE];
+
+    users = fopen("users.txt", "rb");
+
+
+    for(i = 0; i < NoOfUsers(); i++){
+
+        procuradoId = 0;
+        procuradoEmail = 0;
+
+        strcpy(tmpID, perfils[i].id);
+        strcpy(tmpEmail, perfils[i].email);
+
+
+        for(j = 0; j <strlen(procura); j++){
+            procura[j] = tolower(procura[j]);
+
+            for(k = 0; k < strlen(tmpID); k++){
+                tmpID[k] = tolower(tmpID[k]);
+                if(procura[j] == tmpID[k]){
+                    procuradoId++;
+                    break;
+                }
+            }
+
+            for(k = 0; k < strlen(tmpEmail); k++){
+                tmpEmail[k] = tolower(tmpEmail[k]);
+                if(procura[j] == tmpEmail[k]){
+                    procuradoEmail++;
+                    break;
+                }
+            
+            }
+        }
+
+        if(procuradoId == strlen(procura) || procuradoEmail == strlen(procura) ){
+            if(indiceInit != i){
+                TrocaPosNoArray(&perfils, indiceInit, i);
+            }
+            indiceInit++;
+        }
+        
+    }
+
+    perfils = (perfil_s*)realloc(perfils, sizeof(perfil_s) * indiceInit);
+    
+}
+
+void Buscar(){
+
+    FILE* users;
+    perfil_s* perfil;
+    char nomeOuEmail[STRING_SIZE];
+    int i = 0;
+
+    perfil = (perfil_s*)malloc(sizeof(perfil_s) * NoOfUsers());
+    users = fopen("users.txt","rb");
+
+    while(fread(&perfil[i], sizeof(perfil_s), 1, users)) {
+        i++;
+    }
+    fclose(users);
+
+    printf("Digite o nome ou email da conta desejada: ");
+    fgets(nomeOuEmail, STRING_SIZE, stdin);
+
+    FiltraPerfis(&perfil, nomeOuEmail);
+
 }
