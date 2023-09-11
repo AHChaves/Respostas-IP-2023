@@ -25,8 +25,14 @@ void PrintInfos(perfil_s* perfil);
 
 void FreeMatriz(char** matriz);
 
+void EscolhaFiltragem(perfil_s* perfil);
+
 void Listar();
 
-void Busca();
+void TrocaPosNoArray(perfil_s* perfils,int indiceInicio, int posTrocada);
+
+void FiltraPerfis(perfil_s* perfils, char* procura);
+
+void Buscar();
 
 void Visitar(perfil_s* perfil);
