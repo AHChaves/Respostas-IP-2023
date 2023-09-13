@@ -111,14 +111,6 @@ int main(int argc, char **argv)
             CadastraNotas();
             break;
         }
-        case 4:
-        {
-            break;
-        }
-        case 5:
-        {
-            break;
-        }
         default:
         {
             printf("\nOpcao invalida!!!\n");
