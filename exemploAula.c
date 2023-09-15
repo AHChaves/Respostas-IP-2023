@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define SUCESSO 0
 #define TAM_STRING (100+1)
@@ -46,7 +47,7 @@ int main(int argc, char ** argv){
     lista_s * lista;
     int posLista = 0, escolha;
 
-    lista = (lista_s*)malloc(sizeof(lista_s) * posLista);
+    lista = (lista_s*)malloc(sizeof(lista_s) * 1);
 
     do{
 
@@ -58,8 +59,8 @@ int main(int argc, char ** argv){
         case 0: break;
         case 1: {
             Cadastro(&lista[posLista]);
-            posLista++;
             lista = (lista_s*)realloc(lista, sizeof(lista_s) * posLista);
+            posLista++;
             break;
         }
         case 2: {
