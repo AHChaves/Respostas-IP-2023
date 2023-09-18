@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${workspaceFolder}/*.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
@@ -22,7 +22,7 @@
                 "isDefault": true
             },
             "detail": "Tarefa gerada pelo Depurador."
-        }
+        },
     ],
     "version": "2.0.0"
 }

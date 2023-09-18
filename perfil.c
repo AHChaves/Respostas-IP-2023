@@ -15,46 +15,37 @@ void util_removeQuebraLinhaFinal(char dados[]) {
 
 void SortPerfils(perfil_s* perfil, char** info){
 
-    perfil_s swamp;
-    char tmpInfo[STRING_SIZE], tmpNextInfo[STRING_SIZE];
-    int i, j, tamInfo, tamNextInfo, menorTam;
+    perfil_s swap;
+    char tmpString[STRING_SIZE];
+    int check, i, j, k, menorTam,tamInfo, tamNextInfo, numeroUsuarios = NoOfUsers();
 
-    for(i = 0; i < (NoOfUsers() - 1); i++){
-        strcpy(tmpInfo, info[i]);
-        strcpy(tmpNextInfo, info[i+1]);
-
-        tamInfo = strlen(tmpInfo);
-        tamNextInfo = strlen(tmpNextInfo);
-
-        for(j = 0; j < tamNextInfo; j++)
-            tmpNextInfo[j] = tolower(tmpNextInfo[j]);
-
-        for(j = 0; j < tamInfo; j++)
-            tmpInfo[j] = tolower(tmpInfo[j]);   
-
-        menorTam = (tamInfo > tamNextInfo) ? tamNextInfo : tamInfo;
-
-        printf("%s\n", tmpInfo);
-        printf("%s\n", tmpNextInfo);
-
-        if(i >0){
-            printf("%s\n", perfil[i-1].id);
+    for(i = 0; i < numeroUsuarios; i++){
+        tamInfo = strlen(info[i]);
+        for(j = 0; j <tamInfo; j++){
+            info[i][j] = tolower(info[i][j]);
         }
-
-        printf("%s\n", perfil[i].id);
-        printf("%s\n", perfil[i+1].id);
-
-        for(j = 0; j < menorTam; j++){
-            if(tmpInfo[j] > tmpNextInfo[j]){
-                swamp = perfil[i];
-                perfil[i] = perfil[i+1];
-                perfil[i+1] = swamp;
-                break;
-            }
-        }
-        
     }
 
+    for(i = 0; i < numeroUsuarios; i++){
+
+        tamInfo = strlen(info[i]);
+        
+        for(j = 0; j < numeroUsuarios; j++){
+            tamNextInfo = strlen(info[j]);
+
+            menorTam = tamInfo >= tamNextInfo ? tamNextInfo : tamInfo;
+            if(strcmp(info[i], info[j]) < 0){
+                memcpy(&swap, &perfil[i], sizeof(perfil_s));
+                memcpy(&perfil[i], &perfil[j], sizeof(perfil_s));
+                memcpy(&perfil[j], &swap, sizeof(perfil_s));
+                strcpy(tmpString, info[i]);
+                strcpy(info[i], info[j]);
+                strcpy(info[j], tmpString);
+            }
+
+        }
+        
+    }    
 }
 
 int NoOfUsers(){
@@ -62,7 +53,7 @@ int NoOfUsers(){
     FILE* users;
     int number;
 
-    users = fopen("users.txt", "r");
+    users = fopen("users.txt", "rb");
     
     fseek(users, 0,SEEK_END);
     number = ftell(users)/sizeof(perfil_s);
@@ -166,7 +157,6 @@ void Cadastro(){
 
     perfil_s perfil;
 
-    //perfil = (perfil_s*)calloc(1, sizeof(perfil_s));
     users = fopen("users.txt", "ab");
 
     AtribuiIDConta(&perfil);
@@ -183,7 +173,6 @@ void Cadastro(){
 
     fwrite(&perfil, sizeof(perfil_s), 1, users);
 
-    //free(perfil);
     fclose(users);
 }
 
