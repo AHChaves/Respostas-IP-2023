@@ -13,27 +13,28 @@ void util_removeQuebraLinhaFinal(char dados[]) {
     }
 }
 
-void SortPerfils(perfil_s* perfil, char** info){
+void SortPerfils(perfil_s* perfil, char** info, int inicio){
 
     perfil_s swap;
     char tmpString[STRING_SIZE];
     int check, i, j, k, menorTam,tamInfo, tamNextInfo, numeroUsuarios = NoOfUsers();
 
-    for(i = 0; i < numeroUsuarios; i++){
+    for(i = 0; i < inicio; i++){
         tamInfo = strlen(info[i]);
         for(j = 0; j <tamInfo; j++){
             info[i][j] = tolower(info[i][j]);
         }
     }
 
-    for(i = 0; i < numeroUsuarios; i++){
+    for(i = 0; i < inicio; i++){
 
         tamInfo = strlen(info[i]);
         
-        for(j = 0; j < numeroUsuarios; j++){
+        for(j = 0; j < inicio; j++){
             tamNextInfo = strlen(info[j]);
 
             menorTam = tamInfo >= tamNextInfo ? tamNextInfo : tamInfo;
+
             if(strcmp(info[i], info[j]) < 0){
                 memcpy(&swap, &perfil[i], sizeof(perfil_s));
                 memcpy(&perfil[i], &perfil[j], sizeof(perfil_s));
@@ -221,28 +222,28 @@ int Login(perfil_s perfil_logado){
     fclose(users);
 }
 
-void PrintInfos(perfil_s* perfil){
+void PrintInfos(perfil_s* perfil, int numUsers){
     printf("%-20s | %-50s | %-50s\n", "User", "Nome", "Email");
 
-    for(int i = 0; i < NoOfUsers(); i++){
+    for(int i = 0; i < numUsers; i++){
         printf("%-20s | %-50s | %-50s\n", perfil[i].id, perfil[i].name, perfil[i].email);
     }
 }
 
-void FreeMatriz(char** matriz){
-    for(int i = 0; i < NoOfUsers(); i++){
+void FreeMatriz(char** matriz, int numUsers){
+    for(int i = 0; i < numUsers; i++){
         free(matriz[i]);
     }
     free(matriz);
 }
 
-void EscolhaFiltragem(perfil_s* perfil){
+void EscolhaFiltragem(perfil_s* perfil, int numUsers){
 
-    char** sortMode;
     int i = 0, opcao;
+    char** sortMode;
     bool validOption = false;
 
-    sortMode = (char**)malloc(sizeof(char*) * NoOfUsers());
+    sortMode = (char**)malloc( sizeof(char*) * numUsers);
 
     do{
         printf("Escolha uma opcao de listagem :\n1 - Id\n2 - Nome\n3 - Email\nopcao: ");
@@ -251,35 +252,35 @@ void EscolhaFiltragem(perfil_s* perfil){
         switch (opcao)
         {
         case 1:{
-            for(i = 0; i < NoOfUsers(); i++){
+            for(i = 0; i < numUsers; i++){
                 sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].id);
             }
 
-            SortPerfils(perfil, sortMode);
-            PrintInfos(perfil);
+            SortPerfils(perfil, sortMode, numUsers);
+            PrintInfos(perfil, numUsers);
             validOption = true;
             break;
         }
         case 2:{
-            for(i = 0; i < NoOfUsers(); i++){
+            for(i = 0; i < numUsers; i++){
                 sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].name);
             }
 
-            SortPerfils(perfil, sortMode);
-            PrintInfos(perfil);
+            SortPerfils(perfil, sortMode, numUsers);
+            PrintInfos(perfil , numUsers);
             validOption = true;
             break;
         }
         case 3:{
-            for(i = 0; i < NoOfUsers(); i++){
+            for(i = 0; i < numUsers; i++){
                 sortMode[i] = (char*)malloc(sizeof(char) * STRING_SIZE);
                 strcpy(sortMode[i], perfil[i].email);
             }
 
-            SortPerfils(perfil, sortMode);
-            PrintInfos(perfil);
+            SortPerfils(perfil, sortMode, numUsers);
+            PrintInfos(perfil , numUsers);
             validOption = true;
             break;
         }
@@ -290,7 +291,7 @@ void EscolhaFiltragem(perfil_s* perfil){
         }
     }while(!validOption);
    
-    FreeMatriz(sortMode);
+    FreeMatriz(sortMode, numUsers);
 
 }
 
@@ -309,32 +310,21 @@ void Listar(){
     }
     fclose(users);
 
-    EscolhaFiltragem(perfil);
+    EscolhaFiltragem(perfil, NoOfUsers());
     
     free(perfil);
     
 }
 
-void TrocaPosNoArray(perfil_s* perfils,int indiceInicio, int posTrocada){
+int FiltraPerfis(perfil_s* perfils, char* procura){
 
     perfil_s swap;
 
-    swap = perfils[indiceInicio];
-    perfils[indiceInicio] = perfils[posTrocada];
-    perfils[posTrocada] = swap;
+    int i, j, k, procuradoId, procuradoEmail, tamanho = 0;
 
-}
-
-void FiltraPerfis(perfil_s* perfils, char* procura){
-
-    FILE* users;
-    //perfil_s* tmpPerfils;
-    int i, j, k, procuradoId, procuradoEmail, indiceInit= 0;
+    char* emailtmp;
 
     char tmpID[STRING_SIZE], tmpEmail[STRING_SIZE];
-
-    users = fopen("users.txt", "rb");
-
 
     for(i = 0; i < NoOfUsers(); i++){
 
@@ -344,8 +334,11 @@ void FiltraPerfis(perfil_s* perfils, char* procura){
         strcpy(tmpID, perfils[i].id);
         strcpy(tmpEmail, perfils[i].email);
 
+        emailtmp = strtok(tmpEmail, "@");
 
-        for(j = 0; j <strlen(procura); j++){
+        printf("%s", emailtmp);
+
+        for(j = 0; j < strlen(procura); j++){
             procura[j] = tolower(procura[j]);
 
             for(k = 0; k < strlen(tmpID); k++){
@@ -356,9 +349,9 @@ void FiltraPerfis(perfil_s* perfils, char* procura){
                 }
             }
 
-            for(k = 0; k < strlen(tmpEmail); k++){
-                tmpEmail[k] = tolower(tmpEmail[k]);
-                if(procura[j] == tmpEmail[k]){
+            for(k = 0; k < strlen(emailtmp); k++){
+                tmpEmail[k] = tolower(emailtmp[k]);
+                if(procura[j] == emailtmp[k]){
                     procuradoEmail++;
                     break;
                 }
@@ -367,16 +360,16 @@ void FiltraPerfis(perfil_s* perfils, char* procura){
         }
 
         if(procuradoId == strlen(procura) || procuradoEmail == strlen(procura) ){
-            if(indiceInit != i){
-                TrocaPosNoArray(perfils, indiceInit, i);
-            }
-            indiceInit++;
+            swap = perfils[tamanho];
+            perfils[tamanho] = perfils[i];
+            perfils[i] = swap;
+            tamanho++;
         }
         
     }
-
-    perfils = (perfil_s*)realloc(perfils, sizeof(perfil_s) * indiceInit);
     
+
+    return tamanho;
 }
 
 void Buscar(){
@@ -384,7 +377,7 @@ void Buscar(){
     FILE* users;
     perfil_s* perfil;
     char nomeOuEmail[STRING_SIZE];
-    int i = 0;
+    int i = 0, init;
 
     perfil = (perfil_s*)malloc(sizeof(perfil_s) * NoOfUsers());
     users = fopen("users.txt","rb");
@@ -396,8 +389,11 @@ void Buscar(){
 
     printf("Digite o nome ou email da conta desejada: ");
     fgets(nomeOuEmail, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(nomeOuEmail);
 
-    FiltraPerfis(perfil, nomeOuEmail);
+    init = FiltraPerfis(perfil, nomeOuEmail);
 
-    EscolhaFiltragem(perfil);
+    EscolhaFiltragem(perfil, init);
+
+    free(perfil);
 }

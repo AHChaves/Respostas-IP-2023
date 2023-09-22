@@ -9,7 +9,7 @@ typedef struct perfil_t{
 
 void util_removeQuebraLinhaFinal(char dados[]);
 
-void SortPerfils(perfil_s* perfil, char** info);
+void SortPerfils(perfil_s* perfil, char** info, int inicio);
 
 int NoOfUsers();
 
@@ -21,18 +21,18 @@ void Cadastro();
 
 int Login(perfil_s perfil_logado);
 
-void PrintInfos(perfil_s* perfil);
+void PrintInfos(perfil_s* perfil, int numUsers);
 
-void FreeMatriz(char** matriz);
+void FreeMatriz(char** matriz, int numUsers);
 
-void EscolhaFiltragem(perfil_s* perfil);
+void EscolhaFiltragem(perfil_s* perfil, int init);
 
 void Listar();
 
 void TrocaPosNoArray(perfil_s* perfils,int indiceInicio, int posTrocada);
 
-void FiltraPerfis(perfil_s* perfils, char* procura);
+int FiltraPerfis(perfil_s* perfils, char* procura);
 
 void Buscar();
 
-void Visitar(perfil_s* perfil);
+void Visitar(perfil_s perfil);

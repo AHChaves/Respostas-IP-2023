@@ -19,7 +19,7 @@ bool file_exists(const char *filename)
 int main(int argc, char **argv)
 {
     FILE* users;
-    perfil_s perfilLogado;
+    perfil_s perfilLogado, visitado;
     int opcao;
 
     if (!file_exists("users.txt")){
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 
     do{
 
-        printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\nEscolha: ");
+        printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\nEscolha: ");
         scanf("%d%*c", &opcao);
 
         switch (opcao)
@@ -45,6 +45,14 @@ int main(int argc, char **argv)
         }
         case 3: {
             Listar();
+            break;
+        }
+        case 4: {
+            Buscar();
+            break;
+        }
+        case 5: {
+            Visitar(visitado);
             break;
         }
         default: {
