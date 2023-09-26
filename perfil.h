@@ -1,3 +1,5 @@
+#include "postagem.h"
+
 #define STRING_SIZE (100+1)
 
 typedef struct perfil_t{
@@ -5,6 +7,7 @@ typedef struct perfil_t{
     char name[STRING_SIZE];
     char email[STRING_SIZE];
     char password[STRING_SIZE];
+    postagem_s postagem;
 }perfil_s;
 
 void util_removeQuebraLinhaFinal(char dados[]);
@@ -19,9 +22,9 @@ void Email(perfil_s* perfil);
 
 void Cadastro();
 
-int Login(perfil_s perfil_logado, bool logado);
+void Login(perfil_s* perfil_logado, bool* logado);
 
-void Deslogar(bool logado);
+void Deslogar(bool* logado);
 
 void PrintInfos(perfil_s* perfil, int numUsers);
 
@@ -39,4 +42,4 @@ void Buscar();
 
 void MostraUser(perfil_s perfils);
 
-void Visitar(perfil_s perfil);
+void Visitar(perfil_s* perfil);

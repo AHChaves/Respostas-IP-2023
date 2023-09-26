@@ -16,12 +16,11 @@ bool file_exists(const char *filename)
     return file_exist;
 }
 
-void UnLogged(int opcao, perfil_s perfilLogado, perfil_s visitado, bool logado ){
-    
-    printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\nEscolha: ");
+void UnLogged(int* opcao, perfil_s* perfilLogado, perfil_s* visitado, bool* logado ){
+    printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\n5 - Visualizar perfil\nEscolha: ");
     scanf("%d%*c", &opcao);
 
-    switch (opcao)
+    switch (*opcao)
     {
     case 0: break;
     case 1: {
@@ -52,29 +51,30 @@ void UnLogged(int opcao, perfil_s perfilLogado, perfil_s visitado, bool logado )
 
 }
 
-Logged(perfil_s perfil, perfil_s visitado, bool logado, int opcao){
+void Logged(perfil_s perfil, perfil_s* visitado, bool* logado, int *opcao){
 
-    printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\nEscolha: ");
+    printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\nEscolha: ");
     scanf("%d%*c", &opcao);
 
-    switch (opcao)
+    switch (*opcao)
     {
-    case 0: break;
+    case 0 : break;
     case 1: {
+        Deslogar(logado);
         break;
     }
     case 2: {
-        break;
-    }
-    case 3: {
-        break;
-    }
-    case 4: {
         Buscar();
         break;
     }
-    case 5: {
+    case 3: {
         Visitar(visitado);
+        break;
+    }
+    case 4: {
+        break;
+    }
+    case 5: {
         break;
     }
     default: {
@@ -98,14 +98,12 @@ int main(int argc, char **argv)
     }
 
     do{
-
         if(!logado){
-            UnLogged(opcao, perfilLogado, visitado, logado);
+            UnLogged(&opcao, &perfilLogado, &visitado, &logado);
         }
         else{
-            Logged();
+            Logged(perfilLogado, &visitado, &logado, &opcao);
         }
-
     }while(opcao != 0);
 
     return SUCESSO;

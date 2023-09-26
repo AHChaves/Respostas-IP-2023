@@ -177,7 +177,7 @@ void Cadastro(){
     fclose(users);
 }
 
-int Login(perfil_s perfil_logado, bool logado){
+void Login(perfil_s *perfil_logado, bool *logado){
 
     FILE * users;
     perfil_s perfils;
@@ -213,8 +213,8 @@ int Login(perfil_s perfil_logado, bool logado){
         util_removeQuebraLinhaFinal(senha);
 
         if(strcmp(senha, perfils.password) == 0){
-            perfil_logado = perfils;
-            logado = true;
+            *perfil_logado = perfils;
+            *logado = true;
         }
         else printf("Senha invalida!\n");
     }
@@ -223,8 +223,8 @@ int Login(perfil_s perfil_logado, bool logado){
     fclose(users);
 }
 
-void Deslogar(bool logado){
-    logado = false;
+void Deslogar(bool *logado){
+    *logado = false;
 }
 
 void PrintInfos(perfil_s* perfil, int numUsers){
@@ -402,17 +402,17 @@ void Buscar(){
     free(perfil);
 }
 
-void MostraUser(perfil_s perfils){
+void MostraUser(perfil_s perfil){
 
-    printf("%s\n%s", perfils.id, perfils.email);
-
+    printf("%s\n%s\n", perfil.id, perfil.email);
 
 }
 
-void Visitar(perfil_s perfils){
+void Visitar(perfil_s* perfil){
 
     char nomePerfil[STRING_SIZE];
     int i = 0,  indice;
+    perfil_s perfils;
     bool validId = false, validEmail = false;
 
     FILE* users;
@@ -421,14 +421,19 @@ void Visitar(perfil_s perfils){
 
     printf("informe o nome do perfilque deseja acessar: ");
     fgets(nomePerfil, STRING_SIZE, stdin);
+    util_removeQuebraLinhaFinal(nomePerfil);
 
     while(fread(&perfils, sizeof(perfil_s), 1, users)){
         if(strcmp(nomePerfil, perfils.id) == 0){
+            *perfil = perfils;
             validId = true;
             break;
         }
     }
 
-    MostraUser(perfils);
+    if(validId){
+        MostraUser(*perfil);
+    }
+    else printf("O usuario não existe!\n");
 
 }
