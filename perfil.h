@@ -19,7 +19,9 @@ void Email(perfil_s* perfil);
 
 void Cadastro();
 
-int Login(perfil_s perfil_logado);
+int Login(perfil_s perfil_logado, bool logado);
+
+void Deslogar(bool logado);
 
 void PrintInfos(perfil_s* perfil, int numUsers);
 
@@ -34,5 +36,7 @@ void TrocaPosNoArray(perfil_s* perfils,int indiceInicio, int posTrocada);
 int FiltraPerfis(perfil_s* perfils, char* procura);
 
 void Buscar();
+
+void MostraUser(perfil_s perfils);
 
 void Visitar(perfil_s perfil);

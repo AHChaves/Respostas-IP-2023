@@ -177,7 +177,7 @@ void Cadastro(){
     fclose(users);
 }
 
-int Login(perfil_s perfil_logado){
+int Login(perfil_s perfil_logado, bool logado){
 
     FILE * users;
     perfil_s perfils;
@@ -214,12 +214,17 @@ int Login(perfil_s perfil_logado){
 
         if(strcmp(senha, perfils.password) == 0){
             perfil_logado = perfils;
+            logado = true;
         }
         else printf("Senha invalida!\n");
     }
     else printf("Login invalido!\n");
 
     fclose(users);
+}
+
+void Deslogar(bool logado){
+    logado = false;
 }
 
 void PrintInfos(perfil_s* perfil, int numUsers){
@@ -368,7 +373,6 @@ int FiltraPerfis(perfil_s* perfils, char* procura){
         
     }
     
-
     return tamanho;
 }
 
@@ -396,4 +400,35 @@ void Buscar(){
     EscolhaFiltragem(perfil, init);
 
     free(perfil);
+}
+
+void MostraUser(perfil_s perfils){
+
+    printf("%s\n%s", perfils.id, perfils.email);
+
+
+}
+
+void Visitar(perfil_s perfils){
+
+    char nomePerfil[STRING_SIZE];
+    int i = 0,  indice;
+    bool validId = false, validEmail = false;
+
+    FILE* users;
+
+    users = fopen("users.txt", "rb");
+
+    printf("informe o nome do perfilque deseja acessar: ");
+    fgets(nomePerfil, STRING_SIZE, stdin);
+
+    while(fread(&perfils, sizeof(perfil_s), 1, users)){
+        if(strcmp(nomePerfil, perfils.id) == 0){
+            validId = true;
+            break;
+        }
+    }
+
+    MostraUser(perfils);
+
 }
