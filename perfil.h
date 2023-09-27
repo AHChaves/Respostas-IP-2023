@@ -22,7 +22,7 @@ void Email(perfil_s* perfil);
 
 void Cadastro();
 
-void Login(perfil_s* perfil_logado, bool* logado);
+void Login(char* perfil_logado, bool* logado);
 
 void Deslogar(bool* logado);
 
@@ -42,4 +42,4 @@ void Buscar();
 
 void MostraUser(perfil_s perfils);
 
-void Visitar(perfil_s* perfil);
+void Visitar(char* perfil);

@@ -1,3 +1,4 @@
+#define URL_CHAR_SIZE (1000 + 1)
 
 typedef struct postagem_t{
     int id;
@@ -5,7 +6,7 @@ typedef struct postagem_t{
     char descricao[STRING_SIZE];
 }postagem_s;
 
-void Postar();
+void Postar(char* perfil);
 
 void Apagar();
 

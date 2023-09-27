@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include "imprimeImg.h"
 
 /// Estrutura que representa uma imagem em Ascii
 struct asciiImg_s {
@@ -172,21 +173,21 @@ void insta_liberaImagem(asciiImg_t * img) {
  *  \param [in] argv Valores dos argumentos.
  *  \return C�digo de erro indicando o que aconteceu com o programa.
  */
-int main(int argc, char ** argv) {
+void PostaImg(char * url) {
   
   asciiImg_t * img;
-  char * url;
+  //char * url;
   
-  if (argc < 2) {
-    printf("Modo de Uso:\n"\
-           "%s URL_IMAGEM\n",
-           argv[0]
-    );
-    return SUCESSO;
-  }
+  // if (argc < 2) {
+  //   printf("Modo de Uso:\n"\
+  //          "%s URL_IMAGEM\n",
+  //          argv[0]
+  //   );
+  //   //return SUCESSO;
+  // }
   
   // Carrega a imagem
-  url = argv[1];
+  //url = argv[1];
   img = insta_carregaImagem(url, MODO_IMAGEM, IMAGEM_NUMERO_COLUNAS);
   if (img == NULL) {
     // Falha ao carregar a imagem
@@ -200,5 +201,5 @@ int main(int argc, char ** argv) {
   insta_liberaImagem(img);
   
   // Se chegou at� aqui � porque deu tudo certo
-  return SUCESSO;
+  //return SUCESSO;
 }

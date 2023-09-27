@@ -16,7 +16,7 @@ bool file_exists(const char *filename)
     return file_exist;
 }
 
-void UnLogged(int* opcao, perfil_s* perfilLogado, perfil_s* visitado, bool* logado ){
+void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
     printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\n5 - Visualizar perfil\nEscolha: ");
     scanf("%d%*c", &opcao);
 
@@ -51,7 +51,7 @@ void UnLogged(int* opcao, perfil_s* perfilLogado, perfil_s* visitado, bool* loga
 
 }
 
-void Logged(perfil_s perfil, perfil_s* visitado, bool* logado, int *opcao){
+void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
 
     printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\nEscolha: ");
     scanf("%d%*c", &opcao);
@@ -88,7 +88,7 @@ void Logged(perfil_s perfil, perfil_s* visitado, bool* logado, int *opcao){
 int main(int argc, char **argv)
 {
     FILE* users;
-    perfil_s perfilLogado, visitado;
+    char perfilLogado[STRING_SIZE], visitado[STRING_SIZE];
     int opcao;
     bool logado = false;
 

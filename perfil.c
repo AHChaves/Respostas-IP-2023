@@ -36,16 +36,14 @@ void SortPerfils(perfil_s* perfil, char** info, int inicio){
             menorTam = tamInfo >= tamNextInfo ? tamNextInfo : tamInfo;
 
             if(strcmp(info[i], info[j]) < 0){
-                memcpy(&swap, &perfil[i], sizeof(perfil_s));
+                memcpy(&swap, &perfil[i], sizeof(perfil_s));memcpy(&swap, &perfil[i], sizeof(perfil_s));
                 memcpy(&perfil[i], &perfil[j], sizeof(perfil_s));
                 memcpy(&perfil[j], &swap, sizeof(perfil_s));
                 strcpy(tmpString, info[i]);
                 strcpy(info[i], info[j]);
                 strcpy(info[j], tmpString);
             }
-
         }
-        
     }    
 }
 
@@ -213,7 +211,7 @@ void Login(perfil_s *perfil_logado, bool *logado){
         util_removeQuebraLinhaFinal(senha);
 
         if(strcmp(senha, perfils.password) == 0){
-            *perfil_logado = perfils;
+            *perfil_logado = perfils.id;
             *logado = true;
         }
         else printf("Senha invalida!\n");
@@ -425,7 +423,7 @@ void Visitar(perfil_s* perfil){
 
     while(fread(&perfils, sizeof(perfil_s), 1, users)){
         if(strcmp(nomePerfil, perfils.id) == 0){
-            *perfil = perfils;
+            *perfil = perfils.id;
             validId = true;
             break;
         }
