@@ -173,7 +173,7 @@ void insta_liberaImagem(asciiImg_t * img) {
  *  \param [in] argv Valores dos argumentos.
  *  \return C�digo de erro indicando o que aconteceu com o programa.
  */
-void PostaImg(char * url) {
+int PostaImg(char * url) {
   
   asciiImg_t * img;
   //char * url;
@@ -201,5 +201,5 @@ void PostaImg(char * url) {
   insta_liberaImagem(img);
   
   // Se chegou at� aqui � porque deu tudo certo
-  //return SUCESSO;
+  return SUCESSO;
 }

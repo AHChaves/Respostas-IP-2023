@@ -7,14 +7,20 @@
 
 void Postar(char* perfil){
 
-    char url[URL_CHAR_SIZE];
     perfil_s conta;
-    FILE* users;
+    FILE* users, temp;
 
     users = fopen("users.txt", "rb");
+    temp = fopen("temp.txt", "wb");
 
     while(fread(&conta, sizeof(perfil_s), 1, users)){
-        if(strcmp(conta.id, perfil) == 0) break;
+        if(strcmp(conta.id, perfil) == 0){
+            
+            printf("Informe o link da imagem: ");
+            fgets()
+
+        }
+        fwrite(&temp, sizeof(perfil_s), 1, temp);
     }
 
     
