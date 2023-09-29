@@ -158,6 +158,10 @@ void Cadastro(){
 
     users = fopen("users.txt", "ab");
 
+    perfil.numPostagem = 0;
+    perfil.postagem = (postagem_s*)malloc(1 * sizeof(postagem_s));
+
+
     AtribuiIDConta(&perfil);
 
     printf("Digite seu nome: ");
@@ -175,7 +179,7 @@ void Cadastro(){
     fclose(users);
 }
 
-void Login(perfil_s *perfil_logado, bool *logado){
+void Login(char *perfil_logado, bool *logado){
 
     FILE * users;
     perfil_s perfils;
@@ -211,7 +215,7 @@ void Login(perfil_s *perfil_logado, bool *logado){
         util_removeQuebraLinhaFinal(senha);
 
         if(strcmp(senha, perfils.password) == 0){
-            *perfil_logado = perfils.id;
+            strcpy(perfil_logado, perfils.id);
             *logado = true;
         }
         else printf("Senha invalida!\n");
@@ -406,7 +410,7 @@ void MostraUser(perfil_s perfil){
 
 }
 
-void Visitar(perfil_s* perfil){
+void Visitar(char* perfil){
 
     char nomePerfil[STRING_SIZE];
     int i = 0,  indice;
@@ -423,15 +427,15 @@ void Visitar(perfil_s* perfil){
 
     while(fread(&perfils, sizeof(perfil_s), 1, users)){
         if(strcmp(nomePerfil, perfils.id) == 0){
-            *perfil = perfils.id;
+            strcpy(perfil, perfils.id);
+            MostraUser(perfils);
             validId = true;
             break;
         }
     }
 
-    if(validId){
-        MostraUser(*perfil);
+    if(!validId){
+        printf("O usuario não existe!\n");
     }
-    else printf("O usuario não existe!\n");
 
 }

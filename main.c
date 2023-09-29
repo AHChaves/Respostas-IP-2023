@@ -18,7 +18,7 @@ bool file_exists(const char *filename)
 
 void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
     printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\n5 - Visualizar perfil\nEscolha: ");
-    scanf("%d%*c", &opcao);
+    scanf("%d%*c", &*opcao);
 
     switch (*opcao)
     {
@@ -53,8 +53,8 @@ void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
 
 void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
 
-    printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\nEscolha: ");
-    scanf("%d%*c", &opcao);
+    printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\n4 - Postar\nEscolha: ");
+    scanf("%d%*c", &*opcao);
 
     switch (*opcao)
     {
@@ -72,6 +72,7 @@ void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
         break;
     }
     case 4: {
+        Postar(perfil);
         break;
     }
     case 5: {
@@ -99,10 +100,10 @@ int main(int argc, char **argv)
 
     do{
         if(!logado){
-            UnLogged(&opcao, &perfilLogado, &visitado, &logado);
+            UnLogged(&opcao, perfilLogado, visitado, &logado);
         }
         else{
-            Logged(perfilLogado, &visitado, &logado, &opcao);
+            Logged(perfilLogado, visitado, &logado, &opcao);
         }
     }while(opcao != 0);
 

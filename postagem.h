@@ -1,10 +1,6 @@
-#define URL_CHAR_SIZE (1000 + 1)
+#include "structs.h"
 
-typedef struct postagem_t{
-    int id;
-    char imagem[STRING_SIZE];
-    char descricao[STRING_SIZE];
-}postagem_s;
+//void IdCreator(perfil_s* perfils, int numUsers, int pos);
 
 void Postar(char* perfil);
 
@@ -15,3 +11,4 @@ void Editar();
 void ListarPostagens(perfil_s perfil);
 
 void Detalhar();
+

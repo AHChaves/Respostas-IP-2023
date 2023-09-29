@@ -2,14 +2,6 @@
 
 #define STRING_SIZE (100+1)
 
-typedef struct perfil_t{
-    char id[STRING_SIZE];
-    char name[STRING_SIZE];
-    char email[STRING_SIZE];
-    char password[STRING_SIZE];
-    postagem_s postagem;
-}perfil_s;
-
 void util_removeQuebraLinhaFinal(char dados[]);
 
 void SortPerfils(perfil_s* perfil, char** info, int inicio);

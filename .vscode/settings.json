@@ -2,6 +2,9 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "*.embeddedhtml": "html",
-        "postagem.h": "c"
+        "postagem.h": "c",
+        "imprimeimg.h": "c",
+        "stdio.h": "c",
+        "structs.h": "c"
     }
 }

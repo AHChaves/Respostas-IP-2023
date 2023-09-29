@@ -11,19 +11,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
-#include <stdbool.h>
 #include "imprimeImg.h"
 
-/// Estrutura que representa uma imagem em Ascii
-struct asciiImg_s {
-  uint8_t * bytes;
-  int nBytes;
-};
-
-/// Tipo "Imagem ASCII"
-typedef struct asciiImg_s asciiImg_t;
 
 // Tamanho do buffer para cada linha da imagem
 #define BUFFER_TAMANHO  50000
