@@ -179,9 +179,9 @@ void Cadastro(){
     fclose(users);
 }
 
-void Login(char *perfil_logado, bool *logado){
+void Login(perfil_s *perfil_logado, bool *logado){
 
-    FILE * users;
+    FILE* users;
     perfil_s perfils;
 
     users = fopen("users.txt","rb");
@@ -189,40 +189,41 @@ void Login(char *perfil_logado, bool *logado){
     char idOuEmail[STRING_SIZE], senha[STRING_SIZE];
     int i = 0, indice;
     bool validId = false, validEmail = false;
+    if(users != NULL){
 
-    printf("Informe o nome ou email do perfil ao qual esta tentando logar: ");
-    fgets(idOuEmail, STRING_SIZE, stdin);
-    util_removeQuebraLinhaFinal(idOuEmail);
+        printf("Informe o nome ou email do perfil ao qual esta tentando logar: ");
+        fgets(idOuEmail, STRING_SIZE, stdin);
+        util_removeQuebraLinhaFinal(idOuEmail);
 
-    while(fread(&perfils, sizeof(perfil_s), 1, users)){
+        while(fread(&perfils, sizeof(perfil_s), 1, users)){
 
-        if(strcmp(idOuEmail, perfils.id) == 0){
-            validId = true;
-            indice = i;
-            break;
+            if(strcmp(idOuEmail, perfils.id) == 0){
+                validId = true;
+                indice = i;
+                break;
+            }
+            if(strcmp(idOuEmail, perfils.email) == 0){
+                validEmail = true;
+                indice = i;
+                break;
+            }
+            i++;
         }
-        if(strcmp(idOuEmail, perfils.email) == 0){
-            validEmail = true;
-            indice = i;
-            break;
+
+        if(validEmail || validId) {
+            printf("Informe a senha: ");
+            fgets(senha, STRING_SIZE, stdin);
+            util_removeQuebraLinhaFinal(senha);
+
+            if(strcmp(senha, perfils.password) == 0){
+                memcpy(&(*perfil_logado), &perfils, sizeof(perfil_s));
+                *logado = true;
+            }
+            else printf("Senha invalida!\n");
         }
-        i++;
+        else printf("Login invalido!\n");
+        fclose(users);
     }
-
-    if(validEmail || validId) {
-        printf("Informe a senha: ");
-        fgets(senha, STRING_SIZE, stdin);
-        util_removeQuebraLinhaFinal(senha);
-
-        if(strcmp(senha, perfils.password) == 0){
-            strcpy(perfil_logado, perfils.id);
-            *logado = true;
-        }
-        else printf("Senha invalida!\n");
-    }
-    else printf("Login invalido!\n");
-
-    fclose(users);
 }
 
 void Deslogar(bool *logado){
@@ -406,11 +407,34 @@ void Buscar(){
 
 void MostraUser(perfil_s perfil){
 
+    int opcao;
+    
     printf("%s\n%s\n", perfil.id, perfil.email);
+
+    do{
+
+        printf("0 - Voltar\n1 - Mostrar Postagens\n2 - detalhar postagem\nEscolha: ");
+        scanf("%d", &opcao);
+
+        switch (opcao)
+        {
+        case 0: break;
+        case 1: {
+            ListarPostagens(perfil);
+            break;
+        }
+
+        default:{
+            printf("Opcao invalida!!!");
+            break;
+        }
+        }
+
+    }while(opcao != 0);
 
 }
 
-void Visitar(char* perfil){
+void Visitar(){
 
     char nomePerfil[STRING_SIZE];
     int i = 0,  indice;
@@ -427,7 +451,7 @@ void Visitar(char* perfil){
 
     while(fread(&perfils, sizeof(perfil_s), 1, users)){
         if(strcmp(nomePerfil, perfils.id) == 0){
-            strcpy(perfil, perfils.id);
+            //strcpy(perfil, perfils.id);
             MostraUser(perfils);
             validId = true;
             break;

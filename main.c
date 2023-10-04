@@ -16,7 +16,7 @@ bool file_exists(const char *filename)
     return file_exist;
 }
 
-void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
+void UnLogged(int* opcao, perfil_s* perfilLogado, bool* logado ){
     printf("0 - Sair\n1 - Adicionar Usuario\n2 - Logar\n3 - Listar usuarios\n4 - Buscar\n5 - Visualizar perfil\nEscolha: ");
     scanf("%d%*c", &*opcao);
 
@@ -40,7 +40,7 @@ void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
         break;
     }
     case 5: {
-        Visitar(visitado);
+        Visitar();
         break;
     }
     default: {
@@ -51,9 +51,9 @@ void UnLogged(int* opcao, char* perfilLogado, char* visitado, bool* logado ){
 
 }
 
-void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
+void Logged(perfil_s* perfil, bool* logado, int *opcao){
 
-    printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\n4 - Postar\nEscolha: ");
+    printf("0 - Sair\n1 - Deslogar\n2 - Buscar\n3 - Visualizar perfil\n4 - Postar\n5 - Apagar postagem\nEscolha: ");
     scanf("%d%*c", &*opcao);
 
     switch (*opcao)
@@ -68,7 +68,7 @@ void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
         break;
     }
     case 3: {
-        Visitar(visitado);
+        Visitar();
         break;
     }
     case 4: {
@@ -76,6 +76,7 @@ void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
         break;
     }
     case 5: {
+        Apagar(perfil);
         break;
     }
     default: {
@@ -89,7 +90,7 @@ void Logged(char* perfil, char* visitado, bool* logado, int *opcao){
 int main(int argc, char **argv)
 {
     FILE* users;
-    char perfilLogado[STRING_SIZE], visitado[STRING_SIZE];
+    perfil_s perfilLogado;
     int opcao;
     bool logado = false;
 
@@ -100,10 +101,10 @@ int main(int argc, char **argv)
 
     do{
         if(!logado){
-            UnLogged(&opcao, perfilLogado, visitado, &logado);
+            UnLogged(&opcao, &perfilLogado, &logado);
         }
         else{
-            Logged(perfilLogado, visitado, &logado, &opcao);
+            Logged(&perfilLogado, &logado, &opcao);
         }
     }while(opcao != 0);
 

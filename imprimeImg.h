@@ -7,4 +7,4 @@ void insta_imprimeImagem(asciiImg_t * img);
 
 void insta_liberaImagem(asciiImg_t * img);
 
-bool PostaImg(asciiImg_t* img,char * url);
+bool PostaImg(asciiImg_t** img,char * url);

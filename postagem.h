@@ -3,13 +3,12 @@
 
 //void IdCreator(perfil_s* perfils, int numUsers, int pos);
 
-void Postar(char* perfil);
+void Postar(perfil_s* perfil);
 
-void Apagar();
+void Apagar(perfil_s* perfil);
 
 void Editar();
 
 void ListarPostagens(perfil_s perfil);
 
 void Detalhar();
-

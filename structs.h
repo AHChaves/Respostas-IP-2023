@@ -1,6 +1,8 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
+
 #include <stdint.h>
+
 #define TAM_DESC (200+1)
 #define STRING_SIZE (100+1)
 
