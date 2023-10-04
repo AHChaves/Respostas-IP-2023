@@ -136,14 +136,6 @@ void insta_liberaImagem(asciiImg_t * img) {
 /* Inclus�es */
 #include <stdio.h>
 
-/* Erros */
-
-// Constante que associa o c�digo de erro 0 a execu��o esperada.
-#define SUCESSO 0
-
-// Falha ao carregar a imagem fornecida
-#define ERRO_CARREGAR_IMAGEM 1
-
 /* Constantes */
 
 // N�mero de colunas da imagem
@@ -163,33 +155,21 @@ void insta_liberaImagem(asciiImg_t * img) {
  *  \param [in] argv Valores dos argumentos.
  *  \return C�digo de erro indicando o que aconteceu com o programa.
  */
-int PostaImg(char * url) {
+bool PostaImg(asciiImg_t*  img,char * url) {
   
-  asciiImg_t * img;
-  //char * url;
   
-  // if (argc < 2) {
-  //   printf("Modo de Uso:\n"\
-  //          "%s URL_IMAGEM\n",
-  //          argv[0]
-  //   );
-  //   //return SUCESSO;
-  // }
-  
-  // Carrega a imagem
-  //url = argv[1];
   img = insta_carregaImagem(url, MODO_IMAGEM, IMAGEM_NUMERO_COLUNAS);
   if (img == NULL) {
     // Falha ao carregar a imagem
     fprintf(stderr, "Falha ao carregar a imagem da URL %s\n", url);
-    return ERRO_CARREGAR_IMAGEM;
+    return false;
   }
   
-  // Mostra a imagem, o n�mero de bytes e libera a mem�ria
+  //Mostra a imagem, o n�mero de bytes e libera a mem�ria
   insta_imprimeImagem(img);
   printf("N.Bytes Imagem: %d\n", img->nBytes);
   insta_liberaImagem(img);
   
   // Se chegou at� aqui � porque deu tudo certo
-  return SUCESSO;
+  return true;
 }

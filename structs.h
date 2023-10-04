@@ -1,10 +1,17 @@
-#define URL_CHAR_SIZE (500 + 1)
+#ifndef STRUCTS_H
+#define STRUCTS_H
+#include <stdint.h>
 #define TAM_DESC (200+1)
 #define STRING_SIZE (100+1)
 
+typedef struct asciiImg_s{
+  uint8_t* bytes;
+  int nBytes;
+}asciiImg_t;
+
 typedef struct postagem_t{
     int id;
-    char imagem[URL_CHAR_SIZE];
+    asciiImg_t* img;
     char descricao[TAM_DESC];
 }postagem_s;
 
@@ -16,3 +23,5 @@ typedef struct perfil_t{
     int numPostagem;
     postagem_s* postagem;
 }perfil_s;
+
+#endif

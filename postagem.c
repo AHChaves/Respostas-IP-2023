@@ -11,9 +11,10 @@ void Postar(char* perfil){
 
     perfil_s* conta;
     FILE* users;
+    char url[URL_SIZE];
     int numUsers = NoOfUsers();
     int i = 0, numPostagem;
-    bool find = false;
+    bool find = false, imgValid;
 
     conta = (perfil_s*)malloc(numUsers * sizeof(perfil_s));
 
@@ -33,19 +34,20 @@ void Postar(char* perfil){
             conta[i].postagem[numPostagem].id = numPostagem;
 
             printf("Informe o link da imagem: ");
-            fgets(conta[i].postagem[numPostagem].imagem, URL_CHAR_SIZE, stdin);
-            util_removeQuebraLinhaFinal(conta[i].postagem[numPostagem].imagem);
+            fgets(url, URL_SIZE, stdin);
+            util_removeQuebraLinhaFinal(url);
 
-            printf("Informe a descricao da postagem: ");
-            fgets(conta[i].postagem[numPostagem].descricao, TAM_DESC, stdin);
-            util_removeQuebraLinhaFinal(conta[i].postagem[numPostagem].descricao);
-
-            PostaImg(conta[i].postagem[numPostagem].imagem);
+            imgValid = PostaImg(conta[i].postagem[numPostagem].img, url);
             
-            conta[i].numPostagem++;
+            if(imgValid){
+                printf("Informe a descricao da postagem: ");
+                fgets(conta[i].postagem[numPostagem].descricao, TAM_DESC, stdin);
+                util_removeQuebraLinhaFinal(conta[i].postagem[numPostagem].descricao);
+                conta[i].numPostagem++;
+            }
+            
         }
     }
-
 
     if(find){
         users = fopen("users.txt", "wb");

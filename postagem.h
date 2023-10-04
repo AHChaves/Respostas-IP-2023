@@ -1,4 +1,5 @@
 #include "structs.h"
+#define URL_SIZE (500+1)
 
 //void IdCreator(perfil_s* perfils, int numUsers, int pos);
 
